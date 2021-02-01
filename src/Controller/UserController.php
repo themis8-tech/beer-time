@@ -77,4 +77,18 @@ class UserController extends AbstractController
    public function logout()
    {
    }
+
+   
+   public function password(AuthenticationUtils $authenticationUtils): Response
+   {
+      if ($this->getEmail()) {
+
+         return "une email de réinitilaisation c-vous a été envoyé par mail";
+      }
+      $error = $authenticationUtils->getLastAuthenticationError();
+
+      if ($error) {
+         $this->addFlash('danger', 'email inconnu');
+      }
+   }
 }

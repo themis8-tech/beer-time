@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos événements -
+	{{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+	{# vient ecraser le stylesheet def dans base.html #}
+	{# <link rel="stylesheet" href="{{ asset('css/pages/list.css') }}"> #}
+	{{encore_entry_link_tags('pages_list')}}
+{% endblock %}
+
+{% block body %}
+	{# mt = margin top boot-5 #}
+	<div class="container mt-4">
+
+		<h1 class="text-center">Liste des événéments</h1>
+
+		<div class="events">
+			<div class="mb-3">{{ events|length }} évènements disponibles</div>
+
+			{# lien avec les paramètres get nécéssaires#}
+			<div class="d-flex justify-content-end my-2">
+                <a href="{{ path('event_list', {sort: 'createdAt', q: query}) }}" class="btn btn-dark mx-1">Les plus récents</a>
+                <a href="{{ path('event_list', {sort: 'startAt', q: query}) }}" class="btn btn-dark mx-1">À venir</a>
+                <a href="{{ path('event_list', {sort: 'name', q: query}) }}" class="btn btn-dark mx-1">Par ordre alphabétique</a>
+         </div>
+
+			{% for event in events %}
+
+				{# condition pour changement pastille #}
+				{% if event.endAt < date() %}
+					{# on def  avec set une variable satut qui contient la couleur et le texte #}
+					{% set status = {color: 'danger', text: 'Terminé'} %}
+				{% elseif event.startAt < date() %}
+					{% set status = {color: 'success', text: 'En cours'} %}
+				{% else %}
+					{% set status = {color: 'primary', text: 'A venir'} %}
+				{% endif %}
+
+				{# mb=margin-bottom #}
+				<div class="card mb-3 event">
+					<div class="card-infos row ">
+
+						<div
+							class="col-md-3 event-picture">
+							{# on peut remplacer la couleur du background de la pastille par la couleur voulue #}
+							<span class="event-timer badge bg-{{status.color}}">{{status.text}}</span>
+							<img class="card-img-top" src="{{event.picture}}" alt="{{event.name}} ">
+						</div>
+
+						<div class="col-md-9">
+							<div class="card-body">
+								<h5 class="card-title">{{event.name}}</h5>
+								<div>
+									{% for category in event.categories %}
+										<i class="{{category.icon}}" title="{{category.name}}"></i>
+									{% endfor %}
+
+								</div>
+								<p class="card-text">{{event.description}}</p>
+								<p class="card-text event-info">
+									<span>
+										<i class="fas fa-euro-sign"></i>
+										{# si prix afficher prix, sinon afficher gratuit #}
+										{{event.price ?? 'Gratuit'}}
+									</span>
+
+									<span>
+										<i class="fas fa-map-marker-alt"></i>
+										{{event.place.name}}
+										-
+										{{event.place.city}}
+									</span>
+
+									<span>
+										<i class="fas fa-clock"></i>
+										{{event.startAt|date('d/m/Y'~' à '~ 'H:i')}}
+									</span>
+									<span class="spacer"></span>
+									<a href="{{ path('event_display', {id: event.id}) }}" class="btn btn-primary">
+										En savoir plus
+									</a>
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			{% else %}
+				<p>Aucun événement ne correspond à la recherche</p>
+			{% endfor %}
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+{{encore_entry_script_tags('pages_list')}}
+{% endblock %}

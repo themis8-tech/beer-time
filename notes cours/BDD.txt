@@ -1,0 +1,21 @@
+gérée par Doctrine
+sql remplacé par dql
+
+Au lieu de creer des requetes on manipule des objets
+
+2 composants: DBAL (proche du sql) et ORM(gestion d'objets)
+
+CONFIG :fichier.env.local
+
+CREER UNE BDD :php bin/console doctrine:database:create
+
+CREER UNE CLASSE QUI REPRESENTE UNE TABLE
+php bin/console make:entity 
+->entrer le nom avec Maj en debut
+va creer un fichier du nom de la table dans src->entity
+->creer les champs voulus
+
+ php bin/console make:migration = creation d'un fichier dans migrations
+
+verifier le fichier et si ok :php bin/console doctrine:migrations:migrate
+

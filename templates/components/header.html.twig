@@ -1,0 +1,52 @@
+<header>
+	{# nav bar#}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+		<div
+			class="container">
+
+			<!-- burger button -->
+			<a class="navbar-brand" href=" {{ path ('main_home')}} ">Beer-Time</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- nav -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href=" {{ path ('event_list')}} ">Voir la liste des évènements</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link " href=" {{ path ('event_create')}} ">Creer un evenement</a>
+					</li>
+
+				</ul>
+
+				<div class="d-flex">
+					<form method="get" action="{{path('event_list')}}" class="d-flex mx-4">
+						<input
+						class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search" value="{{ query ?? "" }}">
+
+						{# OU value="{{app.request.query.get('query')}}"> #}
+
+						<button class="btn btn-primary" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</form>
+
+					{% if app.user %}
+						<span class="d-flex align-items-center text-light">{{ app.user.username }}</span>
+						<a href="{{ path('user_logout') }}" class="btn btn-outline-primary mx-2">Déconnexion</a>
+					{% else %}
+						<a href="{{ path('user_login') }}" class="btn btn-outline-primary block-gridmx-2">Connexion</a>
+						<a href="{{ path('user_register') }}" class="btn btn-primary mx-2">Inscription</a>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+	</nav>
+	<br>
+</header>

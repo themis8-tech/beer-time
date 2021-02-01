@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Creer un nouvel evenement -
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center">Creer un nouvel évènement</h1>
+
+	<div class="container">
+
+		{{form_start (form)}}
+
+		{# nom #}
+		<div class="m-3">
+			{{form_row (form.name)}}
+
+		</div>
+
+		<div class="m-3">
+			{{form_row (form.description)}}
+		</div>
+
+		<div class=" row m-3">
+			<div class="col-6">
+				{{form_row (form.startAt)}}
+			</div>
+			<div class="col-6">
+				{{form_row (form.endAt)}}
+			</div>
+		</div>
+
+		<div class="m-3">
+			{{form_row (form.picture)}}
+		</div>
+
+
+		<div class="m-3">
+			{{form_row (form.price)}}
+		</div>
+
+
+		<div class="m-3">
+			{{form_row (form.capacity)}}
+		</div>
+
+
+		<div class="row">
+			<div class="row col-4 offset-2 align-items-end ">
+        <div class="col-5">
+				{{form_label (form.place)}}
+         </div>
+         <div class="col-4">
+            {{form_widget (form.place)}}
+         </div>
+			</div>
+			<div class="col-4">
+				{{form_row (form.categories)}}
+			</div>
+		</div>
+
+
+		<div class="d-grid gap-5 col-6 mx-auto my-3 ">
+			<button class="btn btn-primary " type="submit">Creer</button>
+		</div>
+
+		{{form_end (form)}}
+
+	</div>
+
+{% endblock %}

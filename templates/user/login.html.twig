@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Login -
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+	{# {% if error %}
+		<p>Erreur lors de la connexion</p>
+	{% endif %} #}
+
+<div class="container">
+   <form action="{{path('user_login')}}" method= "post">
+      <input class="form-control mb-3" type="email" placeholder="E-mail" name= "_username" value= "{{ lastUsername }}"/>
+      <input class="form-control mb-3" type="password" placeholder="Mot de passe" name= "_password"/>
+      <button type="submit" class= " btn btn-primary">Se connecter</button>
+   </form>
+</div>
+{% endblock %}

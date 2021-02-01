@@ -1,0 +1,30 @@
+Class PHP simple qui réalise une tache spécifique
+gérée par le container de service
+
+On peut utiliser des services existant dans Symfony = injection de dépendances
+=======================================================================================
+
+
+MainController.php/EventController
+
+-> service REQUEST (httpFoudation): infos sur la requete
+$request->query pour param GET
+$request->request pour param POST
+
+
+Services dispo
+
+php bin/console debug auto:autowiring
+
+
+On peut creer ses propres services: msrc/service/MediaService.php
+=======================================================================================
+Exemple :utiliser dans EventController
+
+public fucntion list ( MediaService $mediaservice):Response{
+   $mediaservice->getAllPictures();
+}
+
+
+On peut injecter un service ou un repository dans un autre service dans le __construct de la page service.php
+On peut injecter un sercie dasn un controller dasn n'importe quelle methode

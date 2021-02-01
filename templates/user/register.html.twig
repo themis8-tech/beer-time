@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Formulaire d'inscription -
+	{{parent()}}
+{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig'%}
+
+{% block body %}
+
+	<h1 class="text-center">Creer un compte</h1>
+
+	<div class="container form-control">
+
+		{{form_start (form)}}
+
+		{{form_widget (form)}}
+
+		<div class="d-grid gap-5 col-6 mx-auto my-3 ">
+			<button class="btn btn-info text-light" type="submit">Creer</button>
+		</div>
+
+		{{form_end (form)}}
+
+	</div>
+
+{% endblock %}

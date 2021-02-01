@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <img src="{{ event.picture }}" alt="Photo de {{ event.name }}" class="img-fluid">
+        </div>
+        <div class="col-12 col-md-6">
+            <h1>{{ event.name }}</h1>
+            <div>
+                {% for category in event.categories %}
+                    <i class="{{ category.icon }}" title="{{ category.name }}"></i>
+                {% endfor %}
+            </div>
+            <p>Organisé par {{ event.owner.username }}</p>
+            <p>{{ event.description }}</p>
+            <div class="d-flex justify-content-end">
+                <button data-url="{{ path('event_join', {id: event.id}) }}" class="btn btn-primary" id="event_join" {{ hasParticipation ? 'disabled' : '' }}>
+                    {{ hasParticipation ? "Vous êtes déjà inscrit" : "S'inscrire" }}
+                </button>
+            </div>
+        </div>
+        <div class="col-12 bg-secondary m-2 py-2 d-flex text-light justify-content-around">
+            <span>
+                <i class="fas fa-euro-sign"></i>
+                {{ event.price ?? 'Gratuit' }}
+            </span>
+            <span>
+                <i class="fas fa-map-marker-alt"></i>
+                {{ event.place.name }}<br>
+                {{ event.place.address }}<br>
+                {{ event.place.zipcode }} - {{ event.place.city }}<br>
+                {% if event.place.accessibility %}
+                    <p><i class="fa fa-wheelchair"></i> Accessible auxpersonnes à mobilité réduite</p>
+                {% endif %}
+            </span>
+            <span>
+                <i class="fas fa-clock"></i>
+                Du {{ event.startAt|date('d/m/Y H:i') }} au {{ event.endAt|date('d/m/Y H:i') }}
+            </span>
+            <span>
+                <i class="fas fa-users"></i>
+                {% if event.capacity != null %}
+                    Il reste {{ event.capacity - participantCounter }} places
+                {% else %}
+                    Il reste des places disponibles
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('pages_event') }}
+{% endblock %}

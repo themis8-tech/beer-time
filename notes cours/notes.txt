@@ -1,0 +1,47 @@
+POUR AFFICHER LA PAGE LIST
+=======================================================================================
+list.html.txig : html de la page avec class bootstrap
+
+inclure le css : fichier list.css spécifique 
+-> placé ente les balises block style sheet 
+-> fonction asset
+
+
+faire varier l'affichage du badge en fonction de la date : conditon en haut du bloc (1 seule condtion, 1 seule variable)
+-> condition if 
+-> fonction set status
+
+
+Lien affichage evenement unique
+-> path avec la route +id
+
+EventController :id en parametre = id de l'evenement
+function dipslay
+boucle for each
+item = 1 tableau
+break : pour sortir de la boucle 
+
+function NotFoundHttpException:si evenement non trouvé
+OU
+new response avec le code 404 = response::HTTP_NOT_FOUND (classe du ficher response.php)
+
+
+POUR AFFICHER LA PAGE DISPLAY
+=======================================================================================
+display.html.txig : html de la page avec class bootstrap
+
+lien vers la page join.html.twig "s'inscrire"
+
+
+
+
+SYMFONY ENCORE
+=======================================================================================
+Webpack Encore :gère l'ensemble des ressources front
+
+Installation:
+composer require symfony/webpack-encore-bundle
+npm install
+lancer webpack: npm run watch
+npm install sass-loader@^10.0.0 sass --save-dev (si demandé)
+npm run watch

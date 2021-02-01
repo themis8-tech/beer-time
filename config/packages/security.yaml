@@ -1,0 +1,51 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+    # cryptage du mot de passe
+    encoders:
+        App\Entity\User : bcrypt
+
+
+    providers:
+    # provenance des utilisateurs
+       app_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_MANAGER
+        ROLE_MANAGER: ROLE_USER
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            lazy: true
+            provider: app_provider
+
+            form_login:
+                login_path: user_login
+                check_path: user_login
+                default_target_path: event_create
+
+            logout:
+                path: user_logout
+                target: event_list
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+
+    access_control:
+        - { path: ^/event/create$, roles: ROLE_USER }
+        
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

@@ -1,0 +1,26 @@
+.event .event-info{
+    display: flex;
+    align-items: center;
+}
+
+.event .event-info span{
+    padding: 0 10px;
+}
+
+.event .event-info .spacer{
+    flex: 1;
+}
+
+.event .event-picture{
+    position: relative;
+   
+}
+
+.event .event-timer{
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+.card-infos{
+    align-items: center;
+}

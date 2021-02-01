@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Accueil -
+	{{parent()}}
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+	<div class="landing">
+		<div class="landing-content">
+			<h1>Beer-Time</h1>
+			<h2>Brunes, Blondes ou Rousses...</h2>
+			<br>
+			<a href="{{ path('event_list') }}" class="btn btn-primary">Découvrir nos événéments</a>
+		</div>
+	</div>
+
+{% endblock %}

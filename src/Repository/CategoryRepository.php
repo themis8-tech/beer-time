@@ -31,13 +31,14 @@ class CategoryRepository extends ServiceEntityRepository
         //SELECT category.name
         $stmt->select('c.name');
         //pas besoin du FROM : on est deja dans CategoryRepository
-        //Where category.name (search = placeholder)
+        //Where category.name (search = type du form)
         $stmt->where('c.name LIKE:search');
         //like %d%
         $stmt->setParameter('search', '%d%');
         //limit 2
         $stmt->setMaxResults(2);
 
+        // return le resultat
         return $stmt ->getQuery()->getResult();
     }
 

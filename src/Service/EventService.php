@@ -33,6 +33,7 @@ class EventService
    public function countParticipant( $event )
     {
         return $this->participationRepository->count(array(
+            // on compte le nombre de participant à un event->injecté method display du ctrl
             'event' => $event,
         ));
     }
